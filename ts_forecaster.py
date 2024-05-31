@@ -6,6 +6,9 @@ import os
 from torch import Tensor
 from sympy import symbols, floor
 from layers.StandardNorm import Normalize
+from layers.SelfAttention_Family import FullAttention, AttentionLayer
+from layers.Embed import DataEmbedding_inverted
+from layers.Cross_Modal_Align import CrossModal
 
 class Dual(nn.Module):
     def __init__(
@@ -38,17 +41,17 @@ class Dual(nn.Module):
         self.normalize_layers = Normalize(self.num_nodes, affine=False).to(self.device)
         self.length_to_feature = nn.Linear(self.seq_len, self.channel).to(self.device)
 
-        # Transformer encoder 1
+        # Time Series encoder
         self.encoder_layer_1 = nn.TransformerEncoderLayer(d_model = self.channel, nhead = self.head, batch_first=True, norm_first = True,dropout = self.dropout_n).to(self.device)
         self.encoder_1 = nn.TransformerEncoder(self.encoder_layer_1, num_layers = self.e_layer).to(self.device)
 
-        # LLM embedding encoder 2
+        # Prompt encoder
         self.encoder_layer_2 = nn.TransformerEncoderLayer(d_model = self.d_llm, nhead = self.head, batch_first=True, norm_first = True,dropout = self.dropout_n).to(self.device)
         self.encoder_2 = nn.TransformerEncoder(self.encoder_layer_2, num_layers = self.e_layer).to(self.device)
 
-        # Cross attention
-        self.cross_layer = nn.TransformerDecoderLayer(d_model = self.num_nodes, nhead = 1, batch_first=True, norm_first = True,dropout = self.dropout_n).to(self.device)
-        self.cross = nn.TransformerDecoder(self.cross_layer, num_layers = 1).to(self.device)
+        # Cross modal
+        self.cross = CrossEncoder(d_model= self.num_nodes, n_heads= 1, d_ff=self.d_ff, norm='BatchNorm', attn_dropout=0.1, dropout=0.1,
+                                   pre_norm=False, activation="gelu", res_attention=True, n_layers=1, store_attn=False)
 
         # Transformer decoder
         self.decoder_layer = nn.TransformerDecoderLayer(d_model = self.channel, nhead = self.head, batch_first=True, norm_first = True,dropout = self.dropout_n).to(self.device)
@@ -82,7 +85,7 @@ class Dual(nn.Module):
         embeddings = self.encoder_2(embeddings) # [B, V, E]
         embeddings = embeddings.permute(0,2,1) # [B, E, V]
 
-        # Cross-attention
+        # Cross modal
         cross_out = self.cross(enc_out, embeddings) # Q X KV  [B, C, V]X[B, E, V] = [B, C, V]
         cross_out = cross_out.permute(0,2,1) # [B, V, C]
 
