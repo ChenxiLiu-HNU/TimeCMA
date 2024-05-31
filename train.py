@@ -69,7 +69,7 @@ class trainer:
         device,
         epochs
     ):
-        self.model = Twin(
+        self.model = Dual(
             device=device, channel=channel, num_nodes=num_nodes, seq_len=seq_len, pred_len=pred_len, 
             dropout_n=dropout_n, d_llm=d_llm, e_layer=e_layer, d_layer=d_layer, head=head
         )
