@@ -4,7 +4,7 @@ from torch import nn
 from torch import Tensor
 import torch.nn.functional as F
 import numpy as np
-from layers.all_layers import *
+from layers.pos_enc import *
     
     
 # Cell
