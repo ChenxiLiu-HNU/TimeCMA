@@ -15,7 +15,6 @@ class GenPromptEmb(nn.Module):
         self,
         data_path = 'Exchange',
         model_name = "gpt2",
-        model_path = "/data/cxliu/code/NeurIPS2023-One-Fits-All/Long-term_Forecasting/llama/llama/output",
         device = 'cuda:0',
         input_len = 96,
         d_model = 768,
