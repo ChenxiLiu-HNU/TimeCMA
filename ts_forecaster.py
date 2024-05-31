@@ -7,7 +7,7 @@ from torch import Tensor
 from sympy import symbols, floor
 from layers.StandardNorm import Normalize
 
-class Twin(nn.Module):
+class Dual(nn.Module):
     def __init__(
         self,
         device = "cuda:7",
