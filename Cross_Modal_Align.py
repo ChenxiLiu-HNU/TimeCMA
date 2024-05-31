@@ -8,7 +8,7 @@ from layers.all_layers import *
     
     
 # Cell
-class CrossModality(nn.Module):
+class CrossModal(nn.Module):
     def __init__(self, d_model, n_heads, d_k=None, d_v=None, d_ff=None, 
                         norm='BatchNorm', attn_dropout=0., dropout=0., activation='gelu',
                         res_attention=False, n_layers=1, pre_norm=False, store_attn=False):
