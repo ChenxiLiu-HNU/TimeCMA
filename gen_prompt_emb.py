@@ -15,6 +15,7 @@ class GenPromptEmb(nn.Module):
         self,
         data_path = 'Exchange',
         model_name = "gpt2",
+        model_path = "YOUR_LLAMA2_PATH",
         device = 'cuda:0',
         input_len = 96,
         d_model = 768,
@@ -73,8 +74,6 @@ class GenPromptEmb(nn.Module):
                 tokenized_prompt = self._prepare_prompt(input_template, in_data, in_data_mark, i, j).to(self.device)
                 max_token_count = max(max_token_count, tokenized_prompt.shape[1])
                 tokenized_prompts.append((i, tokenized_prompt.to(self.device),j))
-        # print("Len of tokenized_prompts: ",len(tokenized_prompts)) # exc 321 | ili 7 | fred 107
-        # print(max_token_count) # exc 583 0.3 -> 606 g | ili 216 ｜ fred 231
 
         in_prompt_emb = torch.zeros((len(in_data), max_token_count, self.d_model, in_data.shape[2]), dtype=torch.float32, device=self.device)
 
@@ -92,7 +91,6 @@ class GenPromptEmb(nn.Module):
             in_prompt_emb[i, :max_token_count, :, j] = prompt_embeddings_padded
             in_prompt_emb_1 = in_prompt_emb[:, max_token_count-1:max_token_count, :, :]
             in_prompt_emb_1 = in_prompt_emb_1.squeeze()
-
 
         #   Save and visualize
         #     embeddings = in_prompt_emb_1.t()
