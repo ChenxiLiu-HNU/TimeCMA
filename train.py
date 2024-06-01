@@ -32,7 +32,7 @@ def parse_args():
     parser.add_argument("--head", type=int, default=8, help="heads of attention")
     parser.add_argument("--model_name", type=str, default="gpt2", help="llm")
     parser.add_argument("--weight_decay", type=float, default=1e-3, help="weight decay rate")
-    parser.add_argument('--num_workers', type=int, default=10, help='data loader num workers')
+    parser.add_argument('--num_workers', type=int, default=20, help='data loader num workers')
     parser.add_argument("--epochs", type=int, default=10, help="")
     parser.add_argument('--seed', type=int, default=2036, help='random seed')
     parser.add_argument(
