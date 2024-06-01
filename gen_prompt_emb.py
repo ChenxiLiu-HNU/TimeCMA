@@ -56,12 +56,12 @@ class GenPromptEmb(nn.Module):
         in_prompt = in_prompt.replace("[t1]", start_date).replace("[t2]", end_date)
         # print("in_prompt: ", in_prompt)
 
-        tokenized_prompt = self.tokenizer.encode(in_prompt, return_tensors="pt").to(self.device) # [1, T, V]
+        tokenized_prompt = self.tokenizer.encode(in_prompt, return_tensors="pt").to(self.device)
         return tokenized_prompt
 
     def forward(self, tokenized_prompt):
         with torch.no_grad():
-            prompt_embeddings = self.model(tokenized_prompt).last_hidden_state # [1, T, E, V]
+            prompt_embeddings = self.model(tokenized_prompt).last_hidden_state
         return prompt_embeddings
 
     def generate_embeddings(self, in_data, in_data_mark):
