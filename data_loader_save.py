@@ -13,8 +13,6 @@ class Dataset_ETT_hour(Dataset):
     def __init__(self, root_path="../data", flag='train', size=None, 
                  features='M', data_path='ETTh1',
                  target='OT', scale=False, inverse=False, timeenc=0, freq='h'):
-        # size [seq_len, label_len, pred_len]
-        # info
 
         self.seq_len = size[0]
         self.label_len = size[1]
@@ -33,13 +31,11 @@ class Dataset_ETT_hour(Dataset):
         self.root_path = root_path
         self.data_path = data_path
 
-        # Append '.csv' if not present
         if not data_path.endswith('.csv'):
             data_path_file = data_path
             data_path += '.csv' 
         self.data_path = os.path.join(root_path, data_path)
         self.data_path_file = data_path_file
-
 
         self.__read_data__()
 
@@ -210,8 +206,7 @@ class Dataset_Custom(Dataset):
     def __init__(self, root_path="../data", flag='train', size=None,
                  features='M', data_path='ECL',
                  target='OT', scale=False, timeenc=0, freq='h',patch_len=16,percent=100):
-        # size [seq_len, label_len, pred_len]
-        # info
+
         self.percent = percent
         self.patch_len = patch_len
         if size == None:
@@ -222,7 +217,7 @@ class Dataset_Custom(Dataset):
             self.seq_len = size[0]
             self.label_len = size[1]
             self.pred_len = size[2]
-        # init
+
         assert flag in ['train', 'test', 'val']
         type_map = {'train': 0, 'val': 1, 'test': 2}
         self.set_type = type_map[flag]
