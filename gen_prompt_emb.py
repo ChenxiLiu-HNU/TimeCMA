@@ -101,7 +101,7 @@ class GenPromptEmb(nn.Module):
 
         # similarity_matrix_cpu = last_similarity_matrix.cpu().numpy()
         # similarity_df = pd.DataFrame(similarity_matrix_cpu)
-        # similarity_df.to_csv('./Similarity_matrix/fred.csv', index=False)
+        # similarity_df.to_csv('./Similarity_matrix/Exchange.csv', index=False)
 
         # plt.rcParams.update({'font.size': 20})
 
