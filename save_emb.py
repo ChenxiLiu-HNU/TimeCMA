@@ -10,8 +10,8 @@ from gen_prompt_emb_fred_p5 import GenPromptEmb
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--device", type=str, default="cuda:7")
-    parser.add_argument("--data_path", type=str, default="ETTh1")
+    parser.add_argument("--device", type=str, default="cuda:0")
+    parser.add_argument("--data_path", type=str, default="FRED")
     parser.add_argument("--num_nodes", type=int, default=7)
     parser.add_argument("--input_len", type=int, default=96)
     parser.add_argument("--output_len", type=int, default=96)
@@ -29,10 +29,6 @@ def get_dataset(data_path, flag, input_len, output_len):
         'ETTh2': Dataset_ETT_hour,
         'ETTm1': Dataset_ETT_minute,
         'ETTm2': Dataset_ETT_minute,
-        'PEMS03': Dataset_PEMS,
-        'PEMS04': Dataset_PEMS,
-        'PEMS07': Dataset_PEMS,
-        'PEMS08': Dataset_PEMS
     }
     dataset_class = datasets.get(data_path, Dataset_Custom)
     return dataset_class(flag=flag, size=[input_len, 0, output_len], data_path=data_path)
