@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import pandas as pd
-from transformers import GPT2Tokenizer, GPT2Model
+from transformers import GPT2Tokenizer, GPT2Model, LlamaModel, LlamaTokenizer
 from datetime import datetime, timedelta
 import time
 import numpy as np
