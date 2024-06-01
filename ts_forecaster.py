@@ -15,7 +15,7 @@ class Dual(nn.Module):
         self,
         device = "cuda:7",
         channel = 32,
-        num_nodes = 7,
+        num_nodes = 107,
         seq_len = 96,
         pred_len = 96,
         dropout_n = 0.1,
@@ -71,30 +71,30 @@ class Dual(nn.Module):
         # RevIN
         input_data = self.normalize_layers(input_data, 'norm')
 
-        input_data = input_data.permute(0,2,1) # [B, V, L]
-        input_data = self.length_to_feature(input_data) # [B, V, C]
+        input_data = input_data.permute(0,2,1)
+        input_data = self.length_to_feature(input_data)
 
         embeddings = embeddings.float()
-        embeddings = embeddings.squeeze(-1) # [B, E, V]
-        embeddings = embeddings.permute(0,2,1) # [B, V, E]
+        embeddings = embeddings.squeeze(-1)
+        embeddings = embeddings.permute(0,2,1)
 
         # Encoder
-        enc_out = self.encoder_1(input_data) # [B, V, C]
-        enc_out = enc_out.permute(0,2,1) # [B, C, V]
+        enc_out = self.encoder_1(input_data)
+        enc_out = enc_out.permute(0,2,1)
 
-        embeddings = self.encoder_2(embeddings) # [B, V, E]
-        embeddings = embeddings.permute(0,2,1) # [B, E, V]
+        embeddings = self.encoder_2(embeddings)
+        embeddings = embeddings.permute(0,2,1)
 
         # Cross modal
-        cross_out = self.cross(enc_out, embeddings) # Q X KV  [B, C, V]X[B, E, V] = [B, C, V]
-        cross_out = cross_out.permute(0,2,1) # [B, V, C]
+        cross_out = self.cross(enc_out, embeddings)
+        cross_out = cross_out.permute(0,2,1)
 
         # Decoder
-        dec_out = self.decoder(cross_out, cross_out) # [B, V, C]
+        dec_out = self.decoder(cross_out, cross_out)
 
         # Projection
-        dec_out = self.c_to_length(dec_out) # [B, V, L]
-        dec_out = dec_out.permute(0,2,1) # [B, L, V]
+        dec_out = self.c_to_length(dec_out)
+        dec_out = dec_out.permute(0,2,1)
 
         dec_out = self.normalize_layers(dec_out, 'denorm')
 
