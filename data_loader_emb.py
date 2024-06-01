@@ -50,7 +50,7 @@ class Dataset_ETT_hour(Dataset):
         self.data_path_file = data_path_file
 
         self.model_name = model_name
-        self.embed_path = f"./Embeddings/last_token/{data_path_file}/P5/{flag}/"
+        self.embed_path = f"./Embeddings/{data_path_file}/{flag}/"
 
         self.__read_data__()
 
@@ -120,7 +120,6 @@ class Dataset_ETT_hour(Dataset):
         embeddings = torch.stack(embeddings_stack, dim=-1)
 
         return seq_x, seq_y, seq_x_mark, seq_y_mark, embeddings
-        # return seq_x, seq_y, seq_x_mark, seq_y_mark
     
     def __len__(self):
         return len(self.data_x) - self.seq_len- self.pred_len + 1
@@ -404,7 +403,7 @@ class Dataset_PEMS(Dataset):
         self.data_path = os.path.join(root_path, data_path)
         self.data_path_file = data_path_file
 
-        self.embed_path = f"./Embeddings/last_token/{data_path_file}/P3/{flag}/"
+        self.embed_path = f"./Embeddings/{data_path_file}/{flag}/"
 
         self.__read_data__()
 
