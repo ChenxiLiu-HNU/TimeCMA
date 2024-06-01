@@ -18,24 +18,22 @@ os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:150"
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--device", type=str, default="cuda:0", help="")
-    parser.add_argument("--data_path", type=str, default="ETTh1", help="data path")
+    parser.add_argument("--data_path", type=str, default="FRED", help="data path")
     parser.add_argument("--channel", type=int, default=32, help="number of features")
-    parser.add_argument("--num_nodes", type=int, default=7, help="number of nodes")
+    parser.add_argument("--num_nodes", type=int, default=107, help="number of nodes")
     parser.add_argument("--seq_len", type=int, default=96, help="seq_len")
     parser.add_argument("--pred_len", type=int, default=96, help="out_len")
     parser.add_argument("--batch_size", type=int, default=32, help="batch size")
     parser.add_argument("--learning_rate", type=float, default=1e-4, help="learning rate")
     parser.add_argument("--dropout_n", type=float, default=0.2, help="dropout rate of neural network layers")
-    parser.add_argument("--d_llm", type=int, default=4096, help="hidden dimensions")
-    parser.add_argument("--e_layer", type=int, default=1, help="layers of transformer encoder")
-    parser.add_argument("--d_layer", type=int, default=1, help="layers of transformer decoder")
-    parser.add_argument("--head", type=int, default=2, help="heads of attention")
+    parser.add_argument("--d_llm", type=int, default=768, help="hidden dimensions")
+    parser.add_argument("--e_layer", type=int, default=2, help="layers of transformer encoder")
+    parser.add_argument("--d_layer", type=int, default=2, help="layers of transformer decoder")
+    parser.add_argument("--head", type=int, default=8, help="heads of attention")
     parser.add_argument("--model_name", type=str, default="gpt2", help="llm")
-    parser.add_argument('--patch_len', type=int, default=16, help='patch length') # 16
-    parser.add_argument('--stride', type=int, default=16, help='stride')
     parser.add_argument("--weight_decay", type=float, default=1e-3, help="weight decay rate")
     parser.add_argument('--num_workers', type=int, default=10, help='data loader num workers')
-    parser.add_argument("--epochs", type=int, default=100, help="")
+    parser.add_argument("--epochs", type=int, default=10, help="")
     parser.add_argument('--seed', type=int, default=2036, help='random seed')
     parser.add_argument(
         "--es_patience",
@@ -108,10 +106,6 @@ def load_data(args):
         'ETTh2': Dataset_ETT_hour,
         'ETTm1': Dataset_ETT_minute,
         'ETTm2': Dataset_ETT_minute,
-        'PEMS03': Dataset_PEMS,
-        'PEMS04': Dataset_PEMS,
-        'PEMS07': Dataset_PEMS,
-        'PEMS08': Dataset_PEMS
     }
     data_class = data_map.get(args.data_path, Dataset_Custom)
     train_set = data_class(flag='train', scale=True, size=[args.seq_len, 0, args.pred_len], data_path=args.data_path)
@@ -172,7 +166,6 @@ def main():
         device=device,
         epochs=args.epochs
     )
-
 
     print("Start training...", flush=True)
 
