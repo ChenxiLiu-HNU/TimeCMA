@@ -24,6 +24,6 @@ chmod +x Last_Token_{data_name}.sh
    
 ```bash
 
-chmod +x {dataset}.sh
-./{dataset}.sh
+chmod +x {data_name}.sh
+./{data_name}.sh
 ```
