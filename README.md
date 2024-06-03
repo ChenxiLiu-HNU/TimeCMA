@@ -16,8 +16,8 @@ The pre-processed datasets can be obtained from [here](https://drive.google.com/
 * ### Last toke embedding shortage
 
 ```bash
-chmod +x get_emb_{data_name}.sh
-./get_emb_{data_name}.sh
+chmod +x last_token_{data_name}.sh
+./last_token_{data_name}.sh
 ```
 
 * ### Train and inference
