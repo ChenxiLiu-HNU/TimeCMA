@@ -16,7 +16,7 @@ chmod +x get_emb_{data_name}.sh
 ./get_emb_{data_name}.sh
 ```
 
-## Train and evaluate the model.
+## Train and inference
    
 ```bash
 
