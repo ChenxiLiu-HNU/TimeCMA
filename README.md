@@ -16,7 +16,7 @@ The pre-processed datasets can be obtained from [here](https://drive.google.com/
 * ### Last toke embedding shortage
 
 ```bash
-chmod +x last_token_{data_name}.sh
+chmod +x Last_Token_{data_name}.sh
 ./last_token_{data_name}.sh
 ```
 
