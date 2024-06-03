@@ -7,7 +7,7 @@ import os
 import random
 from torch.utils.data import DataLoader
 from data_loader_emb import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_PEMS
-from ts_forecater import Dual
+from TimeCMA import Dual
 from utils.metrics import MSE, MAE, metric
 import faulthandler
 
