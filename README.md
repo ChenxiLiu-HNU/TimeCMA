@@ -17,13 +17,12 @@ The pre-processed datasets can be obtained from [here](https://drive.google.com/
 
 ```bash
 chmod +x Last_Token_{data_name}.sh
-./last_token_{data_name}.sh
+./Last_Token_{data_name}.sh
 ```
 
 * ### Train and inference
    
 ```bash
-
 chmod +x {data_name}.sh
 ./{data_name}.sh
 ```
