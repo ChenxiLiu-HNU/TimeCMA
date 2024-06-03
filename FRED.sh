@@ -30,7 +30,7 @@ for seq_len in "${seq_lens[@]}"; do
                   --num_nodes 107 \
                   --seq_len $seq_len \
                   --pred_len $pred_len \
-                  --epochs 100 \
+                  --epochs 50 \
                   --seed 8888 \
                   --channel $channel \
                   --head 8 \
