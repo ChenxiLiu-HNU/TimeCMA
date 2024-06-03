@@ -1,4 +1,4 @@
-name: TwinCast
+name: TimeCMA
 channels:
   - pytorch
   - defaults
