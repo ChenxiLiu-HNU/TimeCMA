@@ -3,11 +3,11 @@
 seq_lens=(36)
 pred_lens=(24 36 48 60)
 learning_rates=(0.0025)
-channels=(16 32 128)
+channels=(32)
 e_layers=(2 3)
 d_layers=(2 3)
-dropout_ns=(0.1 0.3)
-batch_sizes=(8 16)
+dropout_ns=(0.1)
+batch_sizes=(16)
 
 model_name="gpt2"
 data_path="FRED"
