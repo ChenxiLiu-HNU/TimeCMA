@@ -13,7 +13,7 @@
 The pre-processed datasets can be obtained from [here](https://drive.google.com/drive/folders/13Cg1KYOlzM5C7K8gK8NfC-F3EYxkM3D2).
 
 ## Usages
-* ### Last toke embedding shortage
+* ### Last token embedding shortage
 
 ```bash
 chmod +x Last_Token_{data_name}.sh
