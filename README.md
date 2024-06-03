@@ -12,7 +12,7 @@
 ## Datasets
 The pre-processed datasets can be obtained from [here](https://drive.google.com/drive/folders/13Cg1KYOlzM5C7K8gK8NfC-F3EYxkM3D2).
 
-## Usage
+## Usages
 * ### Last toke embedding shortage
 
 ```bash
