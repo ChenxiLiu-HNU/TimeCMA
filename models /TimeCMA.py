@@ -50,7 +50,7 @@ class Dual(nn.Module):
         self.encoder_2 = nn.TransformerEncoder(self.encoder_layer_2, num_layers = self.e_layer).to(self.device)
 
         # Cross modal
-        self.cross = CrossEncoder(d_model= self.num_nodes, n_heads= 1, d_ff=self.d_ff, norm='BatchNorm', attn_dropout=0.1, dropout=0.1,
+        self.cross = CrossModal(d_model= self.num_nodes, n_heads= 1, d_ff=self.d_ff, norm='BatchNorm', attn_dropout=0.1, dropout=0.1,
                                    pre_norm=False, activation="gelu", res_attention=True, n_layers=1, store_attn=False).to(self.device)
 
         # Transformer decoder
