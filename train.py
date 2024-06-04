@@ -29,6 +29,7 @@ def parse_args():
     parser.add_argument("--d_llm", type=int, default=768, help="hidden dimensions")
     parser.add_argument("--e_layer", type=int, default=2, help="layers of transformer encoder")
     parser.add_argument("--d_layer", type=int, default=2, help="layers of transformer decoder")
+    parser.add_argument('--d_ff', type=int, default=32, help='dimension of fcn')
     parser.add_argument("--head", type=int, default=8, help="heads of attention")
     parser.add_argument("--model_name", type=str, default="gpt2", help="llm")
     parser.add_argument("--weight_decay", type=float, default=1e-3, help="weight decay rate")
@@ -61,6 +62,7 @@ class trainer:
         d_llm,
         e_layer,
         d_layer,
+        d_ff,
         head,
         lrate,
         wdecay,
@@ -69,7 +71,7 @@ class trainer:
     ):
         self.model = Dual(
             device=device, channel=channel, num_nodes=num_nodes, seq_len=seq_len, pred_len=pred_len, 
-            dropout_n=dropout_n, d_llm=d_llm, e_layer=e_layer, d_layer=d_layer, head=head
+            dropout_n=dropout_n, d_llm=d_llm, e_layer=e_layer, d_layer=d_layer, d_ff=d_ff, head=head
         )
         
         self.optimizer = optim.AdamW(self.model.parameters(), lr=lrate, weight_decay=wdecay)
@@ -160,6 +162,7 @@ def main():
         d_llm=args.d_llm,
         e_layer=args.e_layer,
         d_layer=args.d_layer,
+        d_ff=args.d_ff,
         head=args.head,
         lrate=args.learning_rate,
         wdecay=args.weight_decay,
