@@ -22,6 +22,7 @@ class Dual(nn.Module):
         d_llm = 768,
         e_layer = 2,
         d_layer = 2,
+        d_ff=32,
         head =8
     ):
         super().__init__()
@@ -36,14 +37,15 @@ class Dual(nn.Module):
         self.d_llm = d_llm
         self.e_layer = e_layer
         self.d_layer = d_layer
+        self.d_ff = d_ff
         self.head = head
 
         self.normalize_layers = Normalize(self.num_nodes, affine=False).to(self.device)
         self.length_to_feature = nn.Linear(self.seq_len, self.channel).to(self.device)
 
         # Time Series encoder
-        self.encoder_layer_1 = nn.TransformerEncoderLayer(d_model = self.channel, nhead = self.head, batch_first=True, norm_first = True,dropout = self.dropout_n).to(self.device)
-        self.encoder_1 = nn.TransformerEncoder(self.encoder_layer_1, num_layers = self.e_layer).to(self.device)
+        self.ts_encoder_layer = nn.TransformerEncoderLayer(d_model = self.channel, nhead = self.head, batch_first=True, norm_first = True,dropout = self.dropout_n).to(self.device)
+        self.ts_encoder = nn.TransformerEncoder(self.ts_encoder_layer, num_layers = self.e_layer).to(self.device)
 
         # Prompt encoder
         self.encoder_layer_2 = nn.TransformerEncoderLayer(d_model = self.d_llm, nhead = self.head, batch_first=True, norm_first = True,dropout = self.dropout_n).to(self.device)
@@ -79,7 +81,7 @@ class Dual(nn.Module):
         embeddings = embeddings.permute(0,2,1)
 
         # Encoder
-        enc_out = self.encoder_1(input_data)
+        enc_out = self.ts_encoder(input_data)
         enc_out = enc_out.permute(0,2,1)
 
         embeddings = self.encoder_2(embeddings)
