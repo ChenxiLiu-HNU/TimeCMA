@@ -16,8 +16,8 @@ The pre-processed datasets can be obtained from [here](https://drive.google.com/
 * ### Last token embedding shortage
 
 ```bash
-chmod +x Last_Token_{data_name}.sh
-./Last_Token_{data_name}.sh
+chmod +x Store_{data_name}.sh
+./Store_Token_{data_name}.sh
 ```
 
 * ### Train and inference
