@@ -17,7 +17,7 @@ The pre-processed datasets can be obtained from [here](https://drive.google.com/
 
 ```bash
 chmod +x Store_{data_name}.sh
-./Store_Token_{data_name}.sh
+./Store_{data_name}.sh
 ```
 
 * ### Train and inference
