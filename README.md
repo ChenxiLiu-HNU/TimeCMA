@@ -6,7 +6,7 @@
 * torchvision 0.8.0
 
 ```bash
-> conda env create -f env_ubuntu.yaml
+> conda env create -f env_{ubuntu,windows}.yaml
 ```
 
 ## Datasets
