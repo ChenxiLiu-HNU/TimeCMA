@@ -231,7 +231,7 @@ def main():
 
         if mvalid_loss < loss:
             print("###Update tasks appear###")
-            if i <= args.epochs-2:
+            if i < args.epochs:
                 # It is not necessary to print the results of the testset when epoch is less than n, because the model has not yet converged.
                 loss = mvalid_loss
                 torch.save(engine.model.state_dict(), path + "best_model.pth")
