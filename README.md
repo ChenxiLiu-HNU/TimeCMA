@@ -26,7 +26,7 @@ Multivariate time series forecasting (MTSF) aims to learn temporal dynamics amon
 
 * Python 3.11
 * PyTorch 2.1.2
-* cuda 12.1
+* CUDA 12.1
 * torchvision 0.8.0
 
 ```bash
